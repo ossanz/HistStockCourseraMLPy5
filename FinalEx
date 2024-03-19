@@ -1,4 +1,5 @@
-!pip install yfinance==0.1.67
+#!pip install yfinance==0.1.67
+!pip install yfinance==0.1.70
 !mamba install bs4==4.10.0 -y
 !pip install nbformat==4.2.0
 
@@ -51,8 +52,8 @@ tesla_revenue = pd.DataFrame(columns=["Date", "Revenue"])
 table= soup.find_all("tbody")[1]
 for row in table.find_all('tr'):
     col = row.find_all("td")
-    date = col[0].string 
-    revenue = col[1].string
+    date = col[0].text 
+    revenue = col[1].text
     tesla_revenue = tesla_revenue.append({"Date":date, "Revenue":revenue}, ignore_index=True)
 tesla_revenue
 
@@ -80,8 +81,8 @@ gme_revenue = pd.DataFrame(columns=["Date", "Revenue"])
 table= soup.find_all("tbody")[1]
 for row in table.find_all('tr'):
     col = row.find_all("td")
-    date = col[0].string 
-    revenue = col[1].string
+    date = col[0].text 
+    revenue = col[1].text
     gme_revenue = gme_revenue.append({"Date":date, "Revenue":revenue}, ignore_index=True)
 
 gme_revenue["Revenue"] = gme_revenue['Revenue'].str.replace(',|\$',"")
